@@ -3,14 +3,64 @@ Goals = Take lines of exercises and output Visual poster-like workout plans. Ess
 NonGoals -> Progress Tracking, Complete coverage,
 
 
-## Architecture
-DSL for exercises
-```
-line        := ws? name ws? ":" ws? scheme ws? rest? ws?
-scheme      := sets_reps | rep_percent_list
-sets_reps   := integer ws? "x" ws? integer
-rep_percent_list := rep_percent (ws+ rep_percent)*
-rep_percent := integer ws? "@" ws? number ws? "%"
-rest        := "#" ws? integer ("s" | "m")
-```
-Basicall
+## Exercises Supported
+leg_press_machine
+lunge_hip_opener
+lunge
+neck_rotation_stretch
+neck_side_stretch
+neck_stretch
+alternating_shoulder_press_dumbbell
+arm_reach_stretch
+arms_behind_back_stretch
+overhead_stretch_seated
+plank
+band_lateral_raise
+band_under_feet
+pullup_wide_grip
+pushup
+bench_press
+bench_press_dumbbell
+bent_over_row
+bicep_curl_dumbbell_seated
+bicep_curl
+bike_machine
+cable_crossover
+cable_crunch
+cable_shoulder_external_rotation
+chair_dip
+chest_press_machine
+deadlift
+dip
+dumbbell_bench_row
+dumbbell_deadlift
+elliptical
+extended_side_angle_stretch
+front_plate_raise_rotate
+hip_adduction_machine
+hip_thrust
+incline_bench_press_dumbbell
+incline_bench_press
+incline_bench_row_dumbbell
+jumprope_single_leg
+jumprope
+kneeling_lunge
+knee_stretch_seated
+lateral_raise
+lat_pulldown
+leg_curl_prone_machine
+side_bend_stretch
+side_bend
+side_lunge
+side_plank
+squat
+standing_back_stretch
+standing_hip_abduction_band
+standing_hip_extension_band
+standing_row_bands
+stretch
+treadmill_run
+triceps_extension
+triceps_pushdown
+wall_squat
+wall_stretch_standing
