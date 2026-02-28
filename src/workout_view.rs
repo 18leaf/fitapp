@@ -1,11 +1,14 @@
-/// This file is contains code for creating views to render on the htmx templates
 use crate::dsl::{RepPercent, Rest, Scheme, WorkoutLine};
+use crate::exercise_assets::{SvgAsset, resolve_svg};
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct WorkoutViewLine {
     pub name: String,
     pub detail: WorkoutDetail,
     pub rest: Option<RestView>,
+
+    pub svg_inline: Option<String>,
+    pub matched_asset_name: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -82,6 +85,32 @@ impl From<WorkoutLine> for WorkoutViewLine {
             name: value.name,
             detail: value.scheme.into(),
             rest: value.rest.map(RestView::from),
+            svg_inline: None,
+            matched_asset_name: None,
         }
     }
+}
+
+impl WorkoutViewLine {
+    pub fn from_with_assets(value: WorkoutLine, assets: &[SvgAsset]) -> Self {
+        let resolved = resolve_svg(&value.name, assets);
+
+        Self {
+            name: value.name,
+            detail: value.scheme.into(),
+            rest: value.rest.map(RestView::from),
+            svg_inline: resolved.as_ref().map(|r| r.svg.clone()),
+            matched_asset_name: resolved.map(|r| r.matched_file_name),
+        }
+    }
+}
+
+pub fn into_view_lines_with_assets(
+    lines: Vec<WorkoutLine>,
+    assets: &[SvgAsset],
+) -> Vec<WorkoutViewLine> {
+    lines
+        .into_iter()
+        .map(|line| WorkoutViewLine::from_with_assets(line, assets))
+        .collect()
 }
